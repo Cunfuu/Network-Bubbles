@@ -11,4 +11,4 @@ To run this project, you need the following:
 
 ## Known Issues
 
-* Simply Npm insstall currently does not work
+* Simply Npm install currently does not work
