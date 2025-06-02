@@ -1,5 +1,5 @@
 # Network-Bubbles
-
+I am making this project because I needed something to relate to people, and who has access to what? In order to create and help out with events and organizations that I volunteer for, I'm still working on it, but it's open to suggestions and collaborations, and PRs are welcome. You can contact me if you'd like any input, etc. It's new, so you may want to add your own issues to the issues page.
 ## Requirements
 
 To run this project, you need the following:
