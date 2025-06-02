@@ -3,8 +3,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, collection, addDoc, getDocs, doc, setDoc, deleteDoc, onSnapshot, query, where, writeBatch } from 'firebase/firestore';
 import { ArrowLeftRight, Building, Users, PlusCircle, Edit3, Trash2, X, Search, Link as LinkIcon, Globe, Phone, Mail, Briefcase, Image as ImageIcon, Tv, Video, Speaker, Wifi, SignalHigh, SignalMedium, SignalLow, XCircle, Home, Users2, MonitorPlay, Presentation, UploadCloud, DownloadCloud, AlertCircle, Palette, Circle } from 'lucide-react';
-
-// --- Firebase Configuration ---
+import EntityDetailModal from './components/EntityDetailModal';
+import InfoItem from './components/InfoItem';
+import AmenityItem from './components/AmenityItem';
+import CheckboxInput from './components/CheckboxInput';
+import InputRow from './components/InputRow';
+import { getColorGradeInfo, renderGsmSignalIcon, COLOR_GRADES, DEFAULT_COLOR_GRADE } from './components/utilityFunctions';
+import GraphView from './components/GraphView';
 const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
   apiKey: "YOUR_API_KEY", 
   authDomain: "YOUR_AUTH_DOMAIN", 
@@ -23,26 +28,6 @@ const db = getFirestore(app);
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'network-graph-default-app-id';
 
 // --- Helper Functions ---
-const getCollectionPath = (collectionName, userId) => {
-  return `artifacts/${appId}/public/data/${collectionName}`;
-};
-
-// --- Color Grade Options & Helper ---
-const COLOR_GRADES = {
-    GREEN: { label: "Green", colorClass: "border-green-500", dotClass: "bg-green-500", hex: "#22c55e" },
-    LIGHT_GREEN: { label: "Light Green", colorClass: "border-lime-500", dotClass: "bg-lime-500", hex: "#84cc16" },
-    YELLOW: { label: "Yellow", colorClass: "border-yellow-400", dotClass: "bg-yellow-400", hex: "#facc15" },
-    ORANGE: { label: "Orange", colorClass: "border-orange-500", dotClass: "bg-orange-500", hex: "#f97316" },
-    RED: { label: "Red", colorClass: "border-red-600", dotClass: "bg-red-600", hex: "#dc2626" },
-    UNKNOWN: { label: "Unknown", colorClass: "border-slate-500", dotClass: "bg-slate-500", hex: "#64748b" },
-};
-const DEFAULT_COLOR_GRADE = "UNKNOWN";
-
-const getColorGradeInfo = (gradeKey) => {
-    return COLOR_GRADES[gradeKey] || COLOR_GRADES[DEFAULT_COLOR_GRADE];
-};
-
-
 // --- CSV Helper Functions ---
 function escapeCsvField(field) {
     if (field === null || typeof field === 'undefined') { return ''; }
@@ -126,6 +111,10 @@ function parseCsvAdvanced(csvText) {
     }
     return { headers, data: rows };
 }
+
+const getCollectionPath = (collectionName, userId) => {
+  return `artifacts/${appId}/public/data/${collectionName}`;
+};
 
 
 // --- Main App Component ---
@@ -384,8 +373,8 @@ export default function App() {
         {isProcessing && <div className="fixed inset-0 bg-slate-900 bg-opacity-50 flex justify-center items-center z-[300]"><div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-sky-400"></div><p className="ml-3 text-sky-300">Processing...</p></div>}
         
         {currentView === 'dataInput' && <DataInputView people={filteredPeople} organizations={filteredOrgs} onAddPerson={() => openPersonModal()} onEditPerson={openPersonModal} onDeletePerson={handleDeletePerson} onAddOrg={() => openOrgModal()} onEditOrg={openOrgModal} onDeleteOrg={handleDeleteOrg} searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSelectEntity={handleSelectEntity} onExportPeople={handleExportPeople} onImportPeople={handleImportPeople} onExportOrgs={handleExportOrgs} onImportOrgs={handleImportOrgs} />}
-        {currentView === 'peopleNetwork' && <NetworkView key="people-network" type="people" people={people} organizations={organizations} onSelectEntity={handleSelectEntity} />}
-        {currentView === 'orgNetwork' && <NetworkView key="org-network" type="organizations" people={people} organizations={organizations} onSelectEntity={handleSelectEntity} />}
+        {currentView === 'peopleNetwork' && <GraphView key="people-network" type="people" people={people} organizations={organizations} onSelectEntity={handleSelectEntity} />}
+        {currentView === 'orgNetwork' && <GraphView key="org-network" type="organizations" people={people} organizations={organizations} onSelectEntity={handleSelectEntity} />}
       </main>
 
       {showPersonModal && <PersonModal person={editingPerson} organizations={organizations} onClose={() => { setShowPersonModal(false); setEditingPerson(null); }} onSave={handleAddOrUpdatePerson} />}
@@ -458,7 +447,7 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
 }
 
 // --- EntityCard Component (UPDATED for Color Grade) ---
-function EntityCard({ entity, type, onEdit, onDelete, onSelect }) {
+function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organizations }) {
     const isPerson = type === 'person';
     const imageUrl = isPerson ? entity.photoUrl : entity.logoUrl;
     const placeholderText = entity.name ? entity.name.substring(0, 1).toUpperCase() : (isPerson ? 'P' : 'O');
@@ -574,94 +563,6 @@ function OrgModal({ org, onClose, onSave }) {
   );
 }
 
-// --- DetailPopup Component (UPDATED for Color Grade) ---
-function DetailPopup({ entity, onClose, people, organizations }) {
-    if (!entity) return null;
-    const isPerson = entity.type === 'person';
-    const imageUrl = isPerson ? entity.photoUrl : entity.logoUrl;
-    const placeholderText = entity.name ? entity.name.substring(0, 1).toUpperCase() : (isPerson ? 'P' : 'O');
-    const placeholderImage = `https://placehold.co/96x96/${isPerson ? '718096' : '4A5568'}/E2E8F0?text=${encodeURIComponent(placeholderText)}&font=Inter`;
-    const [imgSrc, setImgSrc] = useState(imageUrl || placeholderImage);
-    useEffect(() => { setImgSrc(imageUrl || placeholderImage); }, [imageUrl, placeholderImage, entity]); 
-    const handleImageError = () => { setImgSrc(placeholderImage); };
-    const gradeInfo = getColorGradeInfo(entity.colorGrade);
-    
-    let relatedEntities = [];
-    if (isPerson) { relatedEntities = (entity.organizationMemberships || []).map(mem => { const org = organizations.find(o => o.id === mem.organizationId); return org ? { ...org, type: 'organization', role: mem.titleInOrg } : null; }).filter(Boolean); } 
-    else { relatedEntities = people.filter(p => (p.organizationMemberships || []).some(mem => mem.organizationId === entity.id)).map(p => { const membership = (p.organizationMemberships || []).find(mem => mem.organizationId === entity.id); return { ...p, type: 'person', role: membership?.titleInOrg }; }); }
-    const renderGsmSignalIcon = (signal) => { if (signal === "Good") return <SignalHigh size={18} className="text-green-400"/>; if (signal === "Fair") return <SignalMedium size={18} className="text-yellow-400"/>; if (signal === "Poor") return <SignalLow size={18} className="text-orange-400"/>; return <XCircle size={18} className="text-red-400"/>; };
-
-    return (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-[150] backdrop-blur-sm" onClick={onClose}>
-            <div className="bg-slate-800 p-6 rounded-xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto relative scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-750" onClick={e => e.stopPropagation()}>
-                <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-slate-200 transition-colors p-1 rounded-full hover:bg-slate-700"><X size={22}/></button>
-                <div className="flex flex-col items-center mb-6 text-center">
-                    <div className={`w-24 h-24 rounded-full bg-slate-700 flex items-center justify-center overflow-hidden border-4 ${gradeInfo.colorClass} mb-4 shadow-lg`}><img src={imgSrc} alt={entity.name || 'Entity image'} className="w-full h-full object-cover" onError={handleImageError} /></div>
-                    <h3 className="text-2xl font-bold text-sky-400">{entity.name || (isPerson ? "Unnamed Person" : "Unnamed Organization")}</h3>
-                    <div className="flex items-center mt-1.5">
-                        <span className={`w-3.5 h-3.5 rounded-full ${gradeInfo.dotClass} mr-2`}></span>
-                        <span className="text-sm text-slate-400">Grade: {gradeInfo.label}</span>
-                    </div>
-                    {isPerson && <p className="text-md text-slate-300 mt-1">{entity.overallTitle || "No title"}</p>}
-                </div>
-                <div className="space-y-3 border-t border-b border-slate-700 py-4"> {isPerson && (<>{entity.email && <InfoItem icon={<Mail size={18} className="text-sky-500"/>} label="Email" value={entity.email} href={`mailto:${entity.email}`} />}{entity.phone && <InfoItem icon={<Phone size={18} className="text-sky-500"/>} label="Phone" value={entity.phone} href={`tel:${entity.phone}`} />}</>)} {!isPerson && (<>{entity.address && <InfoItem icon={<Home size={18} className="text-sky-500"/>} label="Address" value={entity.address} />}{entity.website && <InfoItem icon={<Globe size={18} className="text-sky-500"/>} label="Website" value={entity.website} href={entity.website} target="_blank" />}{entity.phone && <InfoItem icon={<Phone size={18} className="text-sky-500"/>} label="Phone" value={entity.phone} href={`tel:${entity.phone}`} />}</>)} {(isPerson && !entity.email && !entity.phone) && <p className="text-slate-400 text-sm text-center">No contact details provided.</p>} {(!isPerson && !entity.address && !entity.website && !entity.phone) && <p className="text-slate-400 text-sm text-center">No additional details provided.</p>} </div>
-                {!isPerson && entity.rooms && entity.rooms.length > 0 && ( <div className="mt-6 pt-4 border-t border-slate-700"> <h4 className="text-lg font-semibold text-sky-300 mb-3">Available Rooms/Spaces:</h4> <div className="space-y-4 max-h-72 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-750"> {(entity.rooms || []).map((room, index) => ( <div key={index} className="p-3 bg-slate-700/70 rounded-lg shadow"> <h5 className="text-md font-semibold text-sky-400 mb-1">{room.name || `Room ${index + 1}`} <span className="text-xs text-slate-400">({room.type || 'N/A'})</span></h5> <p className="text-sm text-slate-300 mb-2">Seats: {room.seats || 'N/A'}</p> <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs"> <AmenityItem icon={<Tv size={14}/>} label="TV" present={!!room.hasTV} /> <AmenityItem icon={<MonitorPlay size={14}/>} label="Projector" present={!!room.hasProjector} /> <AmenityItem icon={<Speaker size={14}/>} label="Speakers" present={!!room.hasSpeakers} /> <AmenityItem icon={<Video size={14}/>} label="Camera" present={!!room.hasCameras} /> <AmenityItem icon={<Wifi size={14}/>} label="Internet" present={!!room.hasInternet} /> <div className="flex items-center space-x-1.5 text-slate-300"> {renderGsmSignalIcon(room.gsmSignal)} <span>GSM: {room.gsmSignal || 'N/A'}</span> </div> </div> </div> ))} </div> </div> )}
-                {relatedEntities.length > 0 && ( <div className="mt-6 pt-4 border-t border-slate-700"> <h4 className="text-lg font-semibold text-sky-300 mb-3">{isPerson ? "Affiliated Organizations:" : "Key People:"}</h4> <ul className="space-y-2 max-h-60 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-750"> {relatedEntities.map(relEntity => (<li key={relEntity.id} className="flex items-center space-x-3 p-2.5 bg-slate-700/80 rounded-lg hover:bg-slate-600/70 transition-colors group"><div className="flex-shrink-0 w-10 h-10 rounded-full bg-slate-600 flex items-center justify-center overflow-hidden border border-slate-500">{relEntity.type === 'person' && (relEntity.photoUrl ? <img src={relEntity.photoUrl} className="w-full h-full object-cover" alt={relEntity.name || 'Person'} onError={(e) => { const target = e.target ; target.src = placeholderPersonImg(relEntity.name);}}/> : <Users size={20} className="text-slate-400"/>)}{relEntity.type === 'organization' && (relEntity.logoUrl ? <img src={relEntity.logoUrl} className="w-full h-full object-cover" alt={relEntity.name || 'Organization'} onError={(e) => { const target = e.target ; target.src = placeholderOrgImg(relEntity.name);}}/> : <Building size={20} className="text-slate-400"/>)}</div><div className="min-w-0 flex-1"><p className="text-sm font-medium text-slate-100 truncate group-hover:text-sky-300" title={relEntity.name}>{relEntity.name || (relEntity.type === 'person' ? 'Unnamed Person' : 'Unnamed Org')}</p>{relEntity.role && <p className="text-xs text-sky-400 truncate" title={relEntity.role}>{relEntity.role}</p>}</div></li>))} </ul> </div> )}
-                 {relatedEntities.length === 0 && (<div className="mt-6 text-center text-slate-400 text-sm">No {isPerson ? "affiliations" : "key people"} listed.</div>)}
-            </div>
-        </div>
-    );
-}
-
-function CheckboxInput({ label, icon, checked, onChange }) { return ( <label className="flex items-center space-x-2 cursor-pointer p-2 bg-slate-700 rounded-md hover:bg-slate-600 transition-colors"> <input type="checkbox" checked={checked} onChange={onChange} className="form-checkbox h-4 w-4 text-sky-500 bg-slate-800 border-slate-600 rounded focus:ring-sky-500 focus:ring-offset-slate-800" /> {icon && <span className="text-sky-400">{icon}</span>} <span className="text-sm text-slate-200">{label}</span> </label> ); }
-function InputRow({ label, children, icon }) { return ( <div><label className="block text-sm font-medium text-slate-300 mb-1.5 ml-1 flex items-center">{icon && <span className="mr-2 text-sky-400">{icon}</span>}{label}</label>{children}</div> ); }
-
-function AmenityItem({ icon, label, present }) { return ( <div className={`flex items-center space-x-1.5 ${present ? 'text-green-400' : 'text-slate-500'}`}> {React.cloneElement(icon, { size: 14, className: present ? 'text-green-400' : 'text-slate-500' })} <span>{label}</span> </div> ); }
-function InfoItem({ icon, label, value, href, target }) { return (<div className="flex items-start space-x-3 group"><span className="text-sky-400 group-hover:text-sky-300 mt-0.5 flex-shrink-0 w-5 h-5 flex items-center justify-center">{icon}</span><div className="min-w-0 flex-1"><p className="text-xs text-slate-400 group-hover:text-slate-300">{label}</p>{href ? (<a href={href} target={target || "_self"} className="text-sm text-slate-100 hover:text-sky-300 hover:underline break-words transition-colors">{value}</a>) : (<p className="text-sm text-slate-100 break-words">{value}</p>)}</div></div>); }
-
-function NetworkView({ type, people, organizations, onSelectEntity }) {
-  const networkRef = React.useRef(null); const containerRef = React.useRef(null); 
-  const [nodesDataSet, setNodesDataSet] = useState(null); const [edgesDataSet, setEdgesDataSet] = useState(null); const [visModule, setVisModule] = useState(null);
-  useEffect(() => { if (typeof window !== 'undefined' && !visModule) { import('https://cdn.jsdelivr.net/npm/vis-network@latest/standalone/umd/vis-network.min.js').then(() => { if (window.vis) { setVisModule(window.vis); } else { console.error("vis-network loaded but window.vis is not available."); } }).catch(err => console.error("Failed to load vis-network:", err)); } }, [visModule]);
-  useEffect(() => {
-    if (!visModule || !containerRef.current) return;
-    const currentNodesData = nodesDataSet || new visModule.DataSet(); const currentEdgesData = edgesDataSet || new visModule.DataSet();
-    if (!nodesDataSet) setNodesDataSet(currentNodesData); if (!edgesDataSet) setEdgesDataSet(currentEdgesData);
-    let newNodes = []; let newEdges = []; const edgeIdSet = new Set();
-    const placeholderPersonImg = (name) => `https://placehold.co/64x64/718096/E2E8F0?text=${encodeURIComponent(name ? name.substring(0,1).toUpperCase() : 'P')}&font=Inter`;
-    const placeholderOrgImg = (name) => `https://placehold.co/64x64/4A5568/E2E8F0?text=${encodeURIComponent(name ? name.substring(0,1).toUpperCase() : 'O')}&font=Inter`;
-
-    if (type === 'people') {
-      newNodes = people.map(p => {
-        const gradeInfo = getColorGradeInfo(p.colorGrade);
-        return { id: `person-${p.id}`, label: p.name ? (p.name.split(' ')[0].length > 10 ? p.name.split(' ')[0].substring(0,9) + '…' : p.name.split(' ')[0]) : "Person", title: `${p.name || 'N/A'} (${gradeInfo.label})<br/>${p.overallTitle || 'No Title'}`, shape: 'circularImage', image: p.photoUrl || placeholderPersonImg(p.name), brokenImage: placeholderPersonImg(p.name), borderWidth: 3, 
-        color: { border: gradeInfo.hex, background: '#475569', highlight: { border: gradeInfo.hex, background: '#525f76'}, hover: { border: gradeInfo.hex, background: '#525f76'} }, font: { color: '#cbd5e1', size:13 }, size: 28, margin: 10, };
-      });
-      const orgMap = {};
-      people.forEach(p => { if (p.organizationMemberships && Array.isArray(p.organizationMemberships)) { p.organizationMemberships.forEach(mem => { if (!orgMap[mem.organizationId]) orgMap[mem.organizationId] = []; orgMap[mem.organizationId].push(`person-${p.id}`); }); } });
-      Object.values(orgMap).forEach(members => { for (let i = 0; i < members.length; i++) { for (let j = i + 1; j < members.length; j++) { const idPart1 = members[i]; const idPart2 = members[j]; const sortedNodeIds = [idPart1, idPart2].sort(); const edgeId = `p-${sortedNodeIds[0]}-${sortedNodeIds[1]}`; if (!edgeIdSet.has(edgeId)) { newEdges.push({ id: edgeId, from: idPart1, to: idPart2, color: { color: '#64748b', highlight: '#38bdf8', hover: '#38bdf8' }, dashes: true, length: 150 }); edgeIdSet.add(edgeId);}} } });
-    } else if (type === 'organizations') {
-      newNodes = organizations.map(o => {
-        const gradeInfo = getColorGradeInfo(o.colorGrade);
-        return { id: `org-${o.id}`, label: o.name ? (o.name.length > 15 ? o.name.substring(0, 12) + '...' : o.name) : "Organization", title: `${o.name || 'N/A'} (${gradeInfo.label})<br/>${o.website || 'No Website'}`, shape: 'circularImage', image: o.logoUrl || placeholderOrgImg(o.name), brokenImage: placeholderOrgImg(o.name), borderWidth: 3, 
-        color: { border: gradeInfo.hex, background: '#475569', highlight: { border: gradeInfo.hex, background: '#525f76'}, hover: { border: gradeInfo.hex, background: '#525f76'} }, font: { color: '#cbd5e1', size:13 }, size: 32, margin: 10, };
-      });
-      const memberMap = {};
-      people.forEach(p => { if (p.organizationMemberships && Array.isArray(p.organizationMemberships)) { p.organizationMemberships.forEach(mem => { if(!memberMap[p.id]) memberMap[p.id] = []; memberMap[p.id].push(`org-${mem.organizationId}`); }); } });
-      Object.values(memberMap).forEach(orgsForPerson => { for (let i = 0; i < orgsForPerson.length; i++) { for (let j = i + 1; j < orgsForPerson.length; j++) { const idPart1 = orgsForPerson[i]; const idPart2 = orgsForPerson[j]; const sortedNodeIds = [idPart1, idPart2].sort(); const edgeId = `o-${sortedNodeIds[0]}-${sortedNodeIds[1]}`; if (!edgeIdSet.has(edgeId)) { newEdges.push({ id: edgeId, from: idPart1, to: idPart2, color: { color: '#64748b', highlight: '#60a5fa', hover: '#60a5fa' }, length: 200 }); edgeIdSet.add(edgeId); } } } });
-    }
-    currentNodesData.clear(); currentNodesData.add(newNodes); currentEdgesData.clear(); currentEdgesData.add(newEdges);
-    if (!networkRef.current && containerRef.current) {
-      const options = { layout: { improvedLayout: true, hierarchical: false, }, physics: { enabled: true, forceAtlas2Based: { gravitationalConstant: -40, centralGravity: 0.01, springLength: 120, springConstant: 0.08, damping: 0.6, avoidOverlap: 0.6 }, maxVelocity: 50, minVelocity: 0.5, solver: 'forceAtlas2Based', stabilization: { enabled: true, iterations: 1000, updateInterval: 50, onlyDynamicEdges: false, fit: true }, timestep: 0.5, adaptiveTimestep: true }, edges: { width: 1.5, smooth: { enabled: true, type: "continuous", roundness: 0.5 }, arrows: { to: { enabled: false } } }, interaction: { hover: true, tooltipDelay: 200, navigationButtons: true, keyboard: { enabled: true, speed: {x:10,y:10,zoom:0.03}, bindToWindow: true }, dragNodes: true, dragView: true, zoomView: true }, };
-      const newNetwork = new visModule.Network(containerRef.current, { nodes: currentNodesData, edges: currentEdgesData }, options); networkRef.current = newNetwork;
-      newNetwork.on("click", function (params) { if (params.nodes.length > 0) { const nodeId = params.nodes[0]; let entityData; if (nodeId.startsWith('person-')) { const personId = nodeId.replace('person-', ''); entityData = people.find(p => p.id === personId); if (entityData) onSelectEntity(entityData, 'person'); } else if (nodeId.startsWith('org-')) { const orgId = nodeId.replace('org-', ''); entityData = organizations.find(o => o.id === orgId); if (entityData) onSelectEntity(entityData, 'organization'); } } });
-      newNetwork.on("stabilizationIterationsDone", function () { newNetwork.fit(); });
-    }
-    return () => { if (networkRef.current) { networkRef.current.destroy(); networkRef.current = null; } };
-  }, [visModule, type, people, organizations, onSelectEntity, nodesDataSet, edgesDataSet]); 
-
-  return ( <div className="bg-slate-850 p-4 md:p-6 rounded-xl shadow-xl h-[calc(100vh-220px)] min-h-[500px] w-full flex flex-col"> <h2 className="text-2xl font-semibold text-sky-300 mb-4 capitalize">{type} Network Graph</h2> {!visModule && <div className="flex-grow flex items-center justify-center text-slate-400">Loading Graph Library...</div>} <div ref={containerRef} className={`w-full flex-grow bg-slate-900 rounded-lg border border-slate-700 ${!visModule ? 'hidden' : ''}`}></div> <style>{`.vis-network { outline: none; } .vis-navigation .vis-button { background-color: #334155 !important; border: 1px solid #475569 !important; color: #cbd5e1 !important; box-shadow: 0 1px 2px rgba(0,0,0,0.2) !important; } .vis-navigation .vis-button:hover { background-color: #475569 !important; border-color: #525f76 !important; color: #e2e8f0 !important; } .vis-tooltip { background-color: #1e293b !important; color: #e2e8f0 !important; border: 1px solid #334155 !important; padding: 10px !important; border-radius: 8px !important; font-family: 'Inter', sans-serif; box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important; font-size: 0.875rem !important; max-width: 250px !important; white-space: normal !important; }`}</style> </div> );
-}
 
 const styles = ` body { font-family: 'Inter', sans-serif; } .form-input { width: 100%; padding: 0.65rem 0.85rem; border-radius: 0.375rem; background-color: #334155; border: 1px solid #4b5563; color: #f1f5f9; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; font-size: 0.9rem; } .form-input:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2); } .form-input::placeholder { color: #94a3b8; } .scrollbar-thin { scrollbar-width: thin; scrollbar-color: #475569 #1e293b; } .scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; } .scrollbar-thin::-webkit-scrollbar-track { background: #1e293b; border-radius: 10px; } .scrollbar-thin::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 10px; border: 2px solid #1e293b; } .scrollbar-thin::-webkit-scrollbar-thumb:hover { background-color: #64748b; } .form-checkbox { border-radius: 0.25rem; } @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); `;
 if (!document.getElementById('app-global-styles')) { const styleSheet = document.createElement("style"); styleSheet.id = 'app-global-styles'; styleSheet.type = "text/css"; styleSheet.innerText = styles; document.head.appendChild(styleSheet); }
