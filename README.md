@@ -12,4 +12,4 @@ To run this project, you need the following:
 ## Known Issues
 
 * Simply Npm install currently does not work.
-    status-working on it
+    status-working on it and still
