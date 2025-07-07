@@ -11,6 +11,6 @@ To run this project, you need the following:
 
 ## Known Issues
 
-* Simply Npm install currently does not work.
-    status-working on it and still
-    status update partially works
+* Simply Npm install currently does not work. <br>
+    status-working on it and still <br>
+    status update partially works <br>
