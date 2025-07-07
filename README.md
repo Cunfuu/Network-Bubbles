@@ -13,3 +13,4 @@ To run this project, you need the following:
 
 * Simply Npm install currently does not work.
     status-working on it and still
+    status update partially works
