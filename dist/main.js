@@ -160,11 +160,11 @@
       });
     }
   }
-})({"c1Kyz":[function(require,module,exports,__globalThis) {
+})({"dy7cq":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 36111;
+var HMR_SERVER_PORT = 9002;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 var HMR_USE_SSE = false;
@@ -697,6 +697,7 @@ var _inputRowDefault = parcelHelpers.interopDefault(_inputRow);
 var _utilityFunctions = require("./components/utilityFunctions");
 var _graphView = require("./components/GraphView");
 var _graphViewDefault = parcelHelpers.interopDefault(_graphView);
+var _client = require("react-dom/client");
 var _s = $RefreshSig$(), _s1 = $RefreshSig$(), _s2 = $RefreshSig$(), _s3 = $RefreshSig$(), _s4 = $RefreshSig$();
 const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
     apiKey: "YOUR_API_KEY",
@@ -818,6 +819,7 @@ const getCollectionPath = (collectionName, userId)=>{
 };
 function App() {
     _s();
+    console.log("App component is rendering!");
     const [currentView, setCurrentView] = (0, _react.useState)('dataInput');
     const [people, setPeople] = (0, _react.useState)([]);
     const [organizations, setOrganizations] = (0, _react.useState)([]);
@@ -1318,7 +1320,7 @@ function App() {
                 className: "animate-spin rounded-full h-12 w-12 border-b-2 border-sky-500"
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 354,
+                lineNumber: 355,
                 columnNumber: 111
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -1326,13 +1328,13 @@ function App() {
                 children: "Initializing..."
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 354,
+                lineNumber: 355,
                 columnNumber: 196
             }, this)
         ]
     }, void 0, true, {
         fileName: "main.jsx",
-        lineNumber: 354,
+        lineNumber: 355,
         columnNumber: 28
     }, this);
     if (isLoading && isAuthReady && !feedbackMessage.text) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1342,7 +1344,7 @@ function App() {
                 className: "animate-spin rounded-full h-12 w-12 border-b-2 border-sky-500"
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 355,
+                lineNumber: 356,
                 columnNumber: 148
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -1350,18 +1352,25 @@ function App() {
                 children: "Loading Data..."
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 355,
+                lineNumber: 356,
                 columnNumber: 233
             }, this)
         ]
     }, void 0, true, {
         fileName: "main.jsx",
-        lineNumber: 355,
+        lineNumber: 356,
         columnNumber: 65
     }, this);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "min-h-screen bg-slate-900 text-slate-100 font-sans flex flex-col",
         children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "Application Loaded!"
+            }, void 0, false, {
+                fileName: "main.jsx",
+                lineNumber: 360,
+                columnNumber: 7
+            }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("header", {
                 className: "bg-slate-800 shadow-lg p-4 sticky top-0 z-50",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1372,7 +1381,7 @@ function App() {
                             children: "Network Visualizer"
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 361,
+                            lineNumber: 363,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1386,7 +1395,7 @@ function App() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "main.jsx",
-                                    lineNumber: 363,
+                                    lineNumber: 365,
                                     columnNumber: 24
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1395,7 +1404,7 @@ function App() {
                                     children: "Data Input"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 364,
+                                    lineNumber: 366,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1404,7 +1413,7 @@ function App() {
                                     children: "People Network"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 365,
+                                    lineNumber: 367,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1413,24 +1422,24 @@ function App() {
                                     children: "Organization Network"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 366,
+                                    lineNumber: 368,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "main.jsx",
-                            lineNumber: 362,
+                            lineNumber: 364,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "main.jsx",
-                    lineNumber: 360,
+                    lineNumber: 362,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 359,
+                lineNumber: 361,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
@@ -1445,7 +1454,7 @@ function App() {
                                 className: "mr-2"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 372,
+                                lineNumber: 374,
                                 columnNumber: 331
                             }, this),
                             " ",
@@ -1454,7 +1463,7 @@ function App() {
                                 className: "mr-2"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 372,
+                                lineNumber: 374,
                                 columnNumber: 411
                             }, this),
                             " ",
@@ -1469,14 +1478,14 @@ function App() {
                                 children: "\xd7"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 372,
+                                lineNumber: 374,
                                 columnNumber: 477
                             }, this),
                             " "
                         ]
                     }, void 0, true, {
                         fileName: "main.jsx",
-                        lineNumber: 372,
+                        lineNumber: 374,
                         columnNumber: 36
                     }, this),
                     isProcessing && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1486,7 +1495,7 @@ function App() {
                                 className: "animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-sky-400"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 373,
+                                lineNumber: 375,
                                 columnNumber: 125
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -1494,13 +1503,13 @@ function App() {
                                 children: "Processing..."
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 373,
+                                lineNumber: 375,
                                 columnNumber: 221
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "main.jsx",
-                        lineNumber: 373,
+                        lineNumber: 375,
                         columnNumber: 26
                     }, this),
                     currentView === 'dataInput' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(DataInputView, {
@@ -1521,7 +1530,7 @@ function App() {
                         onImportOrgs: handleImportOrgs
                     }, void 0, false, {
                         fileName: "main.jsx",
-                        lineNumber: 375,
+                        lineNumber: 377,
                         columnNumber: 41
                     }, this),
                     currentView === 'peopleNetwork' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _graphViewDefault.default), {
@@ -1531,7 +1540,7 @@ function App() {
                         onSelectEntity: handleSelectEntity
                     }, "people-network", false, {
                         fileName: "main.jsx",
-                        lineNumber: 376,
+                        lineNumber: 378,
                         columnNumber: 45
                     }, this),
                     currentView === 'orgNetwork' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _graphViewDefault.default), {
@@ -1541,13 +1550,13 @@ function App() {
                         onSelectEntity: handleSelectEntity
                     }, "org-network", false, {
                         fileName: "main.jsx",
-                        lineNumber: 377,
+                        lineNumber: 379,
                         columnNumber: 42
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "main.jsx",
-                lineNumber: 371,
+                lineNumber: 373,
                 columnNumber: 7
             }, this),
             showPersonModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(PersonModal, {
@@ -1560,7 +1569,7 @@ function App() {
                 onSave: handleAddOrUpdatePerson
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 380,
+                lineNumber: 382,
                 columnNumber: 27
             }, this),
             showOrgModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(OrgModal, {
@@ -1572,7 +1581,7 @@ function App() {
                 onSave: handleAddOrUpdateOrg
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 381,
+                lineNumber: 383,
                 columnNumber: 24
             }, this),
             selectedEntity && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(DetailPopup, {
@@ -1582,7 +1591,7 @@ function App() {
                 organizations: organizations
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 382,
+                lineNumber: 384,
                 columnNumber: 26
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("footer", {
@@ -1590,13 +1599,13 @@ function App() {
                 children: "Network Visualizer App \xa9 2024"
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 384,
+                lineNumber: 386,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "main.jsx",
-        lineNumber: 358,
+        lineNumber: 359,
         columnNumber: 5
     }, this);
 }
@@ -1620,7 +1629,7 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                         children: "Manage Data"
                     }, void 0, false, {
                         fileName: "main.jsx",
-                        lineNumber: 400,
+                        lineNumber: 402,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1634,26 +1643,26 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                 className: "pl-10 pr-4 py-2 rounded-lg bg-slate-700 border border-slate-600 focus:ring-sky-500 focus:border-sky-500 w-64 md:w-72"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 402,
+                                lineNumber: 404,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _lucideReact.Search), {
                                 className: "absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 403,
+                                lineNumber: 405,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "main.jsx",
-                        lineNumber: 401,
+                        lineNumber: 403,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "main.jsx",
-                lineNumber: 399,
+                lineNumber: 401,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1672,14 +1681,14 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                     className: "mr-2"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 410,
+                                    lineNumber: 412,
                                     columnNumber: 308
                                 }, this),
                                 " People "
                             ]
                         }, void 0, true, {
                             fileName: "main.jsx",
-                            lineNumber: 410,
+                            lineNumber: 412,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1692,25 +1701,25 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                     className: "mr-2"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 411,
+                                    lineNumber: 413,
                                     columnNumber: 322
                                 }, this),
                                 " Organizations "
                             ]
                         }, void 0, true, {
                             fileName: "main.jsx",
-                            lineNumber: 411,
+                            lineNumber: 413,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "main.jsx",
-                    lineNumber: 409,
+                    lineNumber: 411,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 408,
+                lineNumber: 410,
                 columnNumber: 7
             }, this),
             activeTab === 'people' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
@@ -1726,14 +1735,14 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                         className: "mr-3"
                                     }, void 0, false, {
                                         fileName: "main.jsx",
-                                        lineNumber: 419,
+                                        lineNumber: 421,
                                         columnNumber: 81
                                     }, this),
                                     "People List"
                                 ]
                             }, void 0, true, {
                                 fileName: "main.jsx",
-                                lineNumber: 419,
+                                lineNumber: 421,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1749,14 +1758,14 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                                 className: "mr-1.5"
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 421,
+                                                lineNumber: 423,
                                                 columnNumber: 215
                                             }, this),
                                             "Export"
                                         ]
                                     }, void 0, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 421,
+                                        lineNumber: 423,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -1769,7 +1778,7 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                         }
                                     }, void 0, false, {
                                         fileName: "main.jsx",
-                                        lineNumber: 422,
+                                        lineNumber: 424,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1782,14 +1791,14 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                                 className: "mr-1.5"
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 423,
+                                                lineNumber: 425,
                                                 columnNumber: 244
                                             }, this),
                                             "Import"
                                         ]
                                     }, void 0, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 423,
+                                        lineNumber: 425,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1800,26 +1809,26 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                                 className: "mr-1.5 h-5 w-5"
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 424,
+                                                lineNumber: 426,
                                                 columnNumber: 181
                                             }, this),
                                             " Add Person"
                                         ]
                                     }, void 0, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 424,
+                                        lineNumber: 426,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "main.jsx",
-                                lineNumber: 420,
+                                lineNumber: 422,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "main.jsx",
-                        lineNumber: 418,
+                        lineNumber: 420,
                         columnNumber: 11
                     }, this),
                     filteredData.length > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1832,25 +1841,25 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                 onSelect: ()=>onSelectEntity(p, 'person')
                             }, p.id, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 427,
+                                lineNumber: 429,
                                 columnNumber: 133
                             }, this))
                     }, void 0, false, {
                         fileName: "main.jsx",
-                        lineNumber: 427,
+                        lineNumber: 429,
                         columnNumber: 39
                     }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         className: "text-slate-400 text-center py-4",
                         children: "No people found matching your search, or no people added yet."
                     }, void 0, false, {
                         fileName: "main.jsx",
-                        lineNumber: 427,
+                        lineNumber: 429,
                         columnNumber: 338
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "main.jsx",
-                lineNumber: 417,
+                lineNumber: 419,
                 columnNumber: 9
             }, this),
             activeTab === 'organizations' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
@@ -1866,14 +1875,14 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                         className: "mr-3"
                                     }, void 0, false, {
                                         fileName: "main.jsx",
-                                        lineNumber: 434,
+                                        lineNumber: 436,
                                         columnNumber: 81
                                     }, this),
                                     "Organization List"
                                 ]
                             }, void 0, true, {
                                 fileName: "main.jsx",
-                                lineNumber: 434,
+                                lineNumber: 436,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1889,14 +1898,14 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                                 className: "mr-1.5"
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 436,
+                                                lineNumber: 438,
                                                 columnNumber: 220
                                             }, this),
                                             "Export"
                                         ]
                                     }, void 0, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 436,
+                                        lineNumber: 438,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -1909,7 +1918,7 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                         }
                                     }, void 0, false, {
                                         fileName: "main.jsx",
-                                        lineNumber: 437,
+                                        lineNumber: 439,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1922,14 +1931,14 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                                 className: "mr-1.5"
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 438,
+                                                lineNumber: 440,
                                                 columnNumber: 249
                                             }, this),
                                             "Import"
                                         ]
                                     }, void 0, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 438,
+                                        lineNumber: 440,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1940,26 +1949,26 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                                 className: "mr-1.5 h-5 w-5"
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 439,
+                                                lineNumber: 441,
                                                 columnNumber: 176
                                             }, this),
                                             " Add Org"
                                         ]
                                     }, void 0, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 439,
+                                        lineNumber: 441,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "main.jsx",
-                                lineNumber: 435,
+                                lineNumber: 437,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "main.jsx",
-                        lineNumber: 433,
+                        lineNumber: 435,
                         columnNumber: 11
                     }, this),
                     filteredData.length > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1972,31 +1981,31 @@ function DataInputView({ people, organizations, onAddPerson, onEditPerson, onDel
                                 onSelect: ()=>onSelectEntity(o, 'organization')
                             }, o.id, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 442,
+                                lineNumber: 444,
                                 columnNumber: 133
                             }, this))
                     }, void 0, false, {
                         fileName: "main.jsx",
-                        lineNumber: 442,
+                        lineNumber: 444,
                         columnNumber: 39
                     }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         className: "text-slate-400 text-center py-4",
                         children: "No organizations found matching your search, or no organizations added yet."
                     }, void 0, false, {
                         fileName: "main.jsx",
-                        lineNumber: 442,
+                        lineNumber: 444,
                         columnNumber: 317
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "main.jsx",
-                lineNumber: 432,
+                lineNumber: 434,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "main.jsx",
-        lineNumber: 398,
+        lineNumber: 400,
         columnNumber: 5
     }, this);
 }
@@ -2039,12 +2048,12 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                                     onError: handleImageError
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 464,
+                                    lineNumber: 466,
                                     columnNumber: 169
                                 }, this)
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 464,
+                                lineNumber: 466,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2060,7 +2069,7 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                                                 children: entity.name || (isPerson ? "Unnamed Person" : "Unnamed Organization")
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 467,
+                                                lineNumber: 469,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -2068,13 +2077,13 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                                                 title: `Grade: ${gradeInfo.label}`
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 468,
+                                                lineNumber: 470,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 466,
+                                        lineNumber: 468,
                                         columnNumber: 25
                                     }, this),
                                     isPerson && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -2083,7 +2092,7 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                                         children: entity.overallTitle || 'No title specified'
                                     }, void 0, false, {
                                         fileName: "main.jsx",
-                                        lineNumber: 470,
+                                        lineNumber: 472,
                                         columnNumber: 38
                                     }, this),
                                     !isPerson && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -2092,19 +2101,19 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                                         children: entity.website || 'No website specified'
                                     }, void 0, false, {
                                         fileName: "main.jsx",
-                                        lineNumber: 471,
+                                        lineNumber: 473,
                                         columnNumber: 39
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "main.jsx",
-                                lineNumber: 465,
+                                lineNumber: 467,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "main.jsx",
-                        lineNumber: 463,
+                        lineNumber: 465,
                         columnNumber: 17
                     }, this),
                     isPerson && entity.organizationMemberships && entity.organizationMemberships.length > 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2115,7 +2124,7 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                                 children: "Affiliations:"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 476,
+                                lineNumber: 478,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2127,7 +2136,7 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                                             children: mem.organizationName ? mem.organizationName.length > 15 ? mem.organizationName.substring(0, 13) + '...' : mem.organizationName : "N/A"
                                         }, mem.organizationId + (mem.organizationName || Math.random()), false, {
                                             fileName: "main.jsx",
-                                            lineNumber: 478,
+                                            lineNumber: 480,
                                             columnNumber: 92
                                         }, this)),
                                     (entity.organizationMemberships || []).length > 3 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -2139,25 +2148,25 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                                         ]
                                     }, void 0, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 479,
+                                        lineNumber: 481,
                                         columnNumber: 84
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "main.jsx",
-                                lineNumber: 477,
+                                lineNumber: 479,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "main.jsx",
-                        lineNumber: 475,
+                        lineNumber: 477,
                         columnNumber: 22
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "main.jsx",
-                lineNumber: 462,
+                lineNumber: 464,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2171,12 +2180,12 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                             size: 18
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 484,
+                            lineNumber: 486,
                             columnNumber: 257
                         }, this)
                     }, void 0, false, {
                         fileName: "main.jsx",
-                        lineNumber: 484,
+                        lineNumber: 486,
                         columnNumber: 112
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -2187,24 +2196,24 @@ function EntityCard({ entity, type, onEdit, onDelete, onSelect, people, organiza
                             size: 18
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 484,
+                            lineNumber: 486,
                             columnNumber: 427
                         }, this)
                     }, void 0, false, {
                         fileName: "main.jsx",
-                        lineNumber: 484,
+                        lineNumber: 486,
                         columnNumber: 284
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "main.jsx",
-                lineNumber: 484,
+                lineNumber: 486,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "main.jsx",
-        lineNumber: 461,
+        lineNumber: 463,
         columnNumber: 9
     }, this);
 }
@@ -2284,7 +2293,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                             children: person ? 'Edit Person' : 'Add New Person'
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 501,
+                            lineNumber: 503,
                             columnNumber: 96
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -2294,18 +2303,18 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 size: 24
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 501,
+                                lineNumber: 503,
                                 columnNumber: 288
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 501,
+                            lineNumber: 503,
                             columnNumber: 196
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "main.jsx",
-                    lineNumber: 501,
+                    lineNumber: 503,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -2318,7 +2327,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 503,
+                                lineNumber: 505,
                                 columnNumber: 45
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2331,12 +2340,12 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 required: true
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 503,
+                                lineNumber: 505,
                                 columnNumber: 65
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 503,
+                            lineNumber: 505,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2345,7 +2354,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 504,
+                                lineNumber: 506,
                                 columnNumber: 45
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2357,12 +2366,12 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 placeholder: "https://example.com/photo.jpg"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 504,
+                                lineNumber: 506,
                                 columnNumber: 69
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 504,
+                            lineNumber: 506,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2371,7 +2380,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 505,
+                                lineNumber: 507,
                                 columnNumber: 41
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2383,12 +2392,12 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 placeholder: "jane.doe@example.com"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 505,
+                                lineNumber: 507,
                                 columnNumber: 60
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 505,
+                            lineNumber: 507,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2397,7 +2406,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 506,
+                                lineNumber: 508,
                                 columnNumber: 41
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2409,12 +2418,12 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 placeholder: "+1234567890"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 506,
+                                lineNumber: 508,
                                 columnNumber: 61
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 506,
+                            lineNumber: 508,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2423,7 +2432,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 507,
+                                lineNumber: 509,
                                 columnNumber: 49
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2435,12 +2444,12 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 placeholder: "e.g., CEO, Developer"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 507,
+                                lineNumber: 509,
                                 columnNumber: 73
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 507,
+                            lineNumber: 509,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2449,7 +2458,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 508,
+                                lineNumber: 510,
                                 columnNumber: 47
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -2462,17 +2471,17 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                         children: value.label
                                     }, key, false, {
                                         fileName: "main.jsx",
-                                        lineNumber: 511,
+                                        lineNumber: 513,
                                         columnNumber: 21
                                     }, this))
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 509,
+                                lineNumber: 511,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 508,
+                            lineNumber: 510,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2483,7 +2492,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                     children: "Organization Memberships"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 516,
+                                    lineNumber: 518,
                                     columnNumber: 13
                                 }, this),
                                 (formData.organizationMemberships || []).map((mem, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2500,7 +2509,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 517,
+                                                        lineNumber: 519,
                                                         columnNumber: 236
                                                     }, this),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -2510,13 +2519,13 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                                         children: "Remove"
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 517,
+                                                        lineNumber: 519,
                                                         columnNumber: 319
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 517,
+                                                lineNumber: 519,
                                                 columnNumber: 185
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -2531,7 +2540,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                                         children: "Select Organization*"
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 517,
+                                                        lineNumber: 519,
                                                         columnNumber: 680
                                                     }, this),
                                                     organizations.map((org)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -2539,13 +2548,13 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                                             children: org.name
                                                         }, org.id, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 517,
+                                                            lineNumber: 519,
                                                             columnNumber: 752
                                                         }, this))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 517,
+                                                lineNumber: 519,
                                                 columnNumber: 509
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2556,13 +2565,13 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                                 className: "form-input"
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 517,
+                                                lineNumber: 519,
                                                 columnNumber: 818
                                             }, this)
                                         ]
                                     }, index, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 517,
+                                        lineNumber: 519,
                                         columnNumber: 76
                                     }, this)),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -2575,20 +2584,20 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                             className: "mr-1.5"
                                         }, void 0, false, {
                                             fileName: "main.jsx",
-                                            lineNumber: 518,
+                                            lineNumber: 520,
                                             columnNumber: 205
                                         }, this),
                                         " Add Membership"
                                     ]
                                 }, void 0, true, {
                                     fileName: "main.jsx",
-                                    lineNumber: 518,
+                                    lineNumber: 520,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "main.jsx",
-                            lineNumber: 515,
+                            lineNumber: 517,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2601,7 +2610,7 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 520,
+                                    lineNumber: 522,
                                     columnNumber: 91
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -2610,30 +2619,30 @@ function PersonModal({ person, organizations, onClose, onSave }) {
                                     children: person ? 'Save Changes' : 'Add Person'
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 520,
+                                    lineNumber: 522,
                                     columnNumber: 241
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "main.jsx",
-                            lineNumber: 520,
+                            lineNumber: 522,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "main.jsx",
-                    lineNumber: 502,
+                    lineNumber: 504,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "main.jsx",
-            lineNumber: 500,
+            lineNumber: 502,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "main.jsx",
-        lineNumber: 499,
+        lineNumber: 501,
         columnNumber: 5
     }, this);
 }
@@ -2740,7 +2749,7 @@ function OrgModal({ org, onClose, onSave }) {
                             children: org ? 'Edit Organization' : 'Add New Organization'
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 540,
+                            lineNumber: 542,
                             columnNumber: 96
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -2750,18 +2759,18 @@ function OrgModal({ org, onClose, onSave }) {
                                 size: 24
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 540,
+                                lineNumber: 542,
                                 columnNumber: 297
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 540,
+                            lineNumber: 542,
                             columnNumber: 205
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "main.jsx",
-                    lineNumber: 540,
+                    lineNumber: 542,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -2774,7 +2783,7 @@ function OrgModal({ org, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 542,
+                                lineNumber: 544,
                                 columnNumber: 53
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2787,12 +2796,12 @@ function OrgModal({ org, onClose, onSave }) {
                                 required: true
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 542,
+                                lineNumber: 544,
                                 columnNumber: 76
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 542,
+                            lineNumber: 544,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2801,7 +2810,7 @@ function OrgModal({ org, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 543,
+                                lineNumber: 545,
                                 columnNumber: 43
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2813,12 +2822,12 @@ function OrgModal({ org, onClose, onSave }) {
                                 placeholder: "123 Main St, Anytown"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 543,
+                                lineNumber: 545,
                                 columnNumber: 62
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 543,
+                            lineNumber: 545,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2827,7 +2836,7 @@ function OrgModal({ org, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 544,
+                                lineNumber: 546,
                                 columnNumber: 43
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2839,12 +2848,12 @@ function OrgModal({ org, onClose, onSave }) {
                                 placeholder: "https://acme.corp"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 544,
+                                lineNumber: 546,
                                 columnNumber: 63
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 544,
+                            lineNumber: 546,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2853,7 +2862,7 @@ function OrgModal({ org, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 545,
+                                lineNumber: 547,
                                 columnNumber: 44
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2865,12 +2874,12 @@ function OrgModal({ org, onClose, onSave }) {
                                 placeholder: "https://acme.corp/logo.png"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 545,
+                                lineNumber: 547,
                                 columnNumber: 68
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 545,
+                            lineNumber: 547,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2879,7 +2888,7 @@ function OrgModal({ org, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 546,
+                                lineNumber: 548,
                                 columnNumber: 41
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2891,12 +2900,12 @@ function OrgModal({ org, onClose, onSave }) {
                                 placeholder: "+0987654321"
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 546,
+                                lineNumber: 548,
                                 columnNumber: 61
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 546,
+                            lineNumber: 548,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inputRowDefault.default), {
@@ -2905,7 +2914,7 @@ function OrgModal({ org, onClose, onSave }) {
                                 size: 18
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 547,
+                                lineNumber: 549,
                                 columnNumber: 47
                             }, void 0),
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -2918,17 +2927,17 @@ function OrgModal({ org, onClose, onSave }) {
                                         children: value.label
                                     }, key, false, {
                                         fileName: "main.jsx",
-                                        lineNumber: 550,
+                                        lineNumber: 552,
                                         columnNumber: 21
                                     }, this))
                             }, void 0, false, {
                                 fileName: "main.jsx",
-                                lineNumber: 548,
+                                lineNumber: 550,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "main.jsx",
-                            lineNumber: 547,
+                            lineNumber: 549,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2939,7 +2948,7 @@ function OrgModal({ org, onClose, onSave }) {
                                     children: "Room Inventory / Spaces"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 555,
+                                    lineNumber: 557,
                                     columnNumber: 13
                                 }, this),
                                 (formData.rooms || []).map((room, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2957,7 +2966,7 @@ function OrgModal({ org, onClose, onSave }) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 221
                                                     }, this),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -2967,13 +2976,13 @@ function OrgModal({ org, onClose, onSave }) {
                                                         children: "Remove Room"
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 294
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 556,
+                                                lineNumber: 558,
                                                 columnNumber: 170
                                             }, this),
                                             " ",
@@ -2983,7 +2992,7 @@ function OrgModal({ org, onClose, onSave }) {
                                                     size: 16
                                                 }, void 0, false, {
                                                     fileName: "main.jsx",
-                                                    lineNumber: 556,
+                                                    lineNumber: 558,
                                                     columnNumber: 529
                                                 }, void 0),
                                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -2995,12 +3004,12 @@ function OrgModal({ org, onClose, onSave }) {
                                                     required: true
                                                 }, void 0, false, {
                                                     fileName: "main.jsx",
-                                                    lineNumber: 556,
+                                                    lineNumber: 558,
                                                     columnNumber: 556
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 556,
+                                                lineNumber: 558,
                                                 columnNumber: 484
                                             }, this),
                                             " ",
@@ -3014,7 +3023,7 @@ function OrgModal({ org, onClose, onSave }) {
                                                             size: 16
                                                         }, void 0, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 556,
+                                                            lineNumber: 558,
                                                             columnNumber: 833
                                                         }, void 0),
                                                         children: [
@@ -3030,21 +3039,21 @@ function OrgModal({ org, onClose, onSave }) {
                                                                             children: rt
                                                                         }, rt, false, {
                                                                             fileName: "main.jsx",
-                                                                            lineNumber: 556,
+                                                                            lineNumber: 558,
                                                                             columnNumber: 994
                                                                         }, this)),
                                                                     " "
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "main.jsx",
-                                                                lineNumber: 556,
+                                                                lineNumber: 558,
                                                                 columnNumber: 857
                                                             }, this),
                                                             " "
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 799
                                                     }, this),
                                                     " ",
@@ -3054,7 +3063,7 @@ function OrgModal({ org, onClose, onSave }) {
                                                             size: 16
                                                         }, void 0, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 556,
+                                                            lineNumber: 558,
                                                             columnNumber: 1100
                                                         }, void 0),
                                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -3066,19 +3075,19 @@ function OrgModal({ org, onClose, onSave }) {
                                                             placeholder: "e.g., 50"
                                                         }, void 0, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 556,
+                                                            lineNumber: 558,
                                                             columnNumber: 1121
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 1060
                                                     }, this),
                                                     " "
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 556,
+                                                lineNumber: 558,
                                                 columnNumber: 743
                                             }, this),
                                             " ",
@@ -3087,7 +3096,7 @@ function OrgModal({ org, onClose, onSave }) {
                                                 children: "Equipment & Amenities:"
                                             }, void 0, false, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 556,
+                                                lineNumber: 558,
                                                 columnNumber: 1303
                                             }, this),
                                             " ",
@@ -3101,14 +3110,14 @@ function OrgModal({ org, onClose, onSave }) {
                                                             size: 16
                                                         }, void 0, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 556,
+                                                            lineNumber: 558,
                                                             columnNumber: 1475
                                                         }, void 0),
                                                         checked: !!room.hasTV,
                                                         onChange: ()=>handleRoomChange(index, 'hasTV', !room.hasTV)
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 1443
                                                     }, this),
                                                     " ",
@@ -3118,14 +3127,14 @@ function OrgModal({ org, onClose, onSave }) {
                                                             size: 16
                                                         }, void 0, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 556,
+                                                            lineNumber: 558,
                                                             columnNumber: 1620
                                                         }, void 0),
                                                         checked: !!room.hasProjector,
                                                         onChange: ()=>handleRoomChange(index, 'hasProjector', !room.hasProjector)
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 1581
                                                     }, this),
                                                     " ",
@@ -3135,14 +3144,14 @@ function OrgModal({ org, onClose, onSave }) {
                                                             size: 16
                                                         }, void 0, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 556,
+                                                            lineNumber: 558,
                                                             columnNumber: 1794
                                                         }, void 0),
                                                         checked: !!room.hasSpeakers,
                                                         onChange: ()=>handleRoomChange(index, 'hasSpeakers', !room.hasSpeakers)
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 1756
                                                     }, this),
                                                     " ",
@@ -3152,14 +3161,14 @@ function OrgModal({ org, onClose, onSave }) {
                                                             size: 16
                                                         }, void 0, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 556,
+                                                            lineNumber: 558,
                                                             columnNumber: 1960
                                                         }, void 0),
                                                         checked: !!room.hasCameras,
                                                         onChange: ()=>handleRoomChange(index, 'hasCameras', !room.hasCameras)
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 1923
                                                     }, this),
                                                     " ",
@@ -3169,21 +3178,21 @@ function OrgModal({ org, onClose, onSave }) {
                                                             size: 16
                                                         }, void 0, false, {
                                                             fileName: "main.jsx",
-                                                            lineNumber: 556,
+                                                            lineNumber: 558,
                                                             columnNumber: 2128
                                                         }, void 0),
                                                         checked: !!room.hasInternet,
                                                         onChange: ()=>handleRoomChange(index, 'hasInternet', !room.hasInternet)
                                                     }, void 0, false, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 2084
                                                     }, this),
                                                     " "
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 556,
+                                                lineNumber: 558,
                                                 columnNumber: 1387
                                             }, this),
                                             " ",
@@ -3193,25 +3202,25 @@ function OrgModal({ org, onClose, onSave }) {
                                                     size: 16
                                                 }, void 0, false, {
                                                     fileName: "main.jsx",
-                                                    lineNumber: 556,
+                                                    lineNumber: 558,
                                                     columnNumber: 2332
                                                 }, void 0) : room.gsmSignal === "Fair" ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _lucideReact.SignalMedium), {
                                                     size: 16
                                                 }, void 0, false, {
                                                     fileName: "main.jsx",
-                                                    lineNumber: 556,
+                                                    lineNumber: 558,
                                                     columnNumber: 2386
                                                 }, void 0) : room.gsmSignal === "Poor" ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _lucideReact.SignalLow), {
                                                     size: 16
                                                 }, void 0, false, {
                                                     fileName: "main.jsx",
-                                                    lineNumber: 556,
+                                                    lineNumber: 558,
                                                     columnNumber: 2442
                                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _lucideReact.XCircle), {
                                                     size: 16
                                                 }, void 0, false, {
                                                     fileName: "main.jsx",
-                                                    lineNumber: 556,
+                                                    lineNumber: 558,
                                                     columnNumber: 2467
                                                 }, void 0),
                                                 children: [
@@ -3227,28 +3236,28 @@ function OrgModal({ org, onClose, onSave }) {
                                                                     children: gs
                                                                 }, gs, false, {
                                                                     fileName: "main.jsx",
-                                                                    lineNumber: 556,
+                                                                    lineNumber: 558,
                                                                     columnNumber: 2644
                                                                 }, this)),
                                                             " "
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "main.jsx",
-                                                        lineNumber: 556,
+                                                        lineNumber: 558,
                                                         columnNumber: 2490
                                                     }, this),
                                                     " "
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "main.jsx",
-                                                lineNumber: 556,
+                                                lineNumber: 558,
                                                 columnNumber: 2261
                                             }, this),
                                             " "
                                         ]
                                     }, index, true, {
                                         fileName: "main.jsx",
-                                        lineNumber: 556,
+                                        lineNumber: 558,
                                         columnNumber: 60
                                     }, this)),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -3261,20 +3270,20 @@ function OrgModal({ org, onClose, onSave }) {
                                             className: "mr-1.5"
                                         }, void 0, false, {
                                             fileName: "main.jsx",
-                                            lineNumber: 557,
+                                            lineNumber: 559,
                                             columnNumber: 206
                                         }, this),
                                         " Add Room/Space"
                                     ]
                                 }, void 0, true, {
                                     fileName: "main.jsx",
-                                    lineNumber: 557,
+                                    lineNumber: 559,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "main.jsx",
-                            lineNumber: 554,
+                            lineNumber: 556,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -3287,7 +3296,7 @@ function OrgModal({ org, onClose, onSave }) {
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 559,
+                                    lineNumber: 561,
                                     columnNumber: 91
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -3296,30 +3305,30 @@ function OrgModal({ org, onClose, onSave }) {
                                     children: org ? 'Save Changes' : 'Add Organization'
                                 }, void 0, false, {
                                     fileName: "main.jsx",
-                                    lineNumber: 559,
+                                    lineNumber: 561,
                                     columnNumber: 241
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "main.jsx",
-                            lineNumber: 559,
+                            lineNumber: 561,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "main.jsx",
-                    lineNumber: 541,
+                    lineNumber: 543,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "main.jsx",
-            lineNumber: 539,
+            lineNumber: 541,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "main.jsx",
-        lineNumber: 538,
+        lineNumber: 540,
         columnNumber: 5
     }, this);
 }
@@ -3350,7 +3359,7 @@ const CheckCircle = (props)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
                 d: "M22 11.08V12a10 10 0 1 1-5.93-9.14"
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 569,
+                lineNumber: 571,
                 columnNumber: 224
             }, undefined),
             " ",
@@ -3358,17 +3367,24 @@ const CheckCircle = (props)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
                 points: "22 4 12 14.01 9 11.01"
             }, void 0, false, {
                 fileName: "main.jsx",
-                lineNumber: 569,
+                lineNumber: 571,
                 columnNumber: 277
             }, undefined),
             " "
         ]
     }, void 0, true, {
         fileName: "main.jsx",
-        lineNumber: 569,
+        lineNumber: 571,
         columnNumber: 34
     }, undefined);
 _c5 = CheckCircle;
+const container = document.getElementById('root');
+const root = (0, _client.createRoot)(container);
+root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
+    fileName: "main.jsx",
+    lineNumber: 577,
+    columnNumber: 13
+}, undefined));
 var _c, _c1, _c2, _c3, _c4, _c5;
 $RefreshReg$(_c, "App");
 $RefreshReg$(_c1, "DataInputView");
@@ -3382,7 +3398,7 @@ $RefreshReg$(_c5, "CheckCircle");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","firebase/app":"aM3Fo","firebase/auth":"79vzg","firebase/firestore":"8A4BC","lucide-react":"8oTgY","./components/EntityDetailModal":"cCmIa","./components/InfoItem":"a0BB0","./components/AmenityItem":"e4cGj","./components/CheckboxInput":"skbLs","./components/InputRow":"EHoNO","./components/utilityFunctions":"dnodn","./components/GraphView":"hYpGz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","firebase/app":"aM3Fo","firebase/auth":"79vzg","firebase/firestore":"8A4BC","lucide-react":"8oTgY","./components/EntityDetailModal":"cCmIa","./components/InfoItem":"a0BB0","./components/AmenityItem":"e4cGj","./components/CheckboxInput":"skbLs","./components/InputRow":"EHoNO","./components/utilityFunctions":"dnodn","./components/GraphView":"hYpGz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-dom/client":"lOjBx"}],"iTorj":[function(require,module,exports,__globalThis) {
 'use strict';
 module.exports = require("ee51401569654d91");
 
@@ -119939,6 +119955,27 @@ parcelHelpers.exportAll(_chartJs, exports);
 (0, _chartJs.Chart).register(...(0, _chartJs.registerables));
 exports.default = (0, _chartJs.Chart);
 
-},{"../dist/chart.js":"ipU8D","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["c1Kyz","bnsKE"], "bnsKE", "parcelRequire1f88", {}, null, null, "http://localhost:36111")
+},{"../dist/chart.js":"ipU8D","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lOjBx":[function(require,module,exports,__globalThis) {
+'use strict';
+var m = require("aaccff5d309d9239");
+var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+exports.createRoot = function(c, o) {
+    i.usingClientEntryPoint = true;
+    try {
+        return m.createRoot(c, o);
+    } finally{
+        i.usingClientEntryPoint = false;
+    }
+};
+exports.hydrateRoot = function(c, h, o) {
+    i.usingClientEntryPoint = true;
+    try {
+        return m.hydrateRoot(c, h, o);
+    } finally{
+        i.usingClientEntryPoint = false;
+    }
+};
+
+},{"aaccff5d309d9239":"j6uA9"}]},["dy7cq","bnsKE"], "bnsKE", "parcelRequire1f88", {}, null, null, "http://localhost:9002")
 
 //# sourceMappingURL=main.js.map
