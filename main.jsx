@@ -119,7 +119,6 @@ const getCollectionPath = (collectionName, userId) => {
 
 // --- Main App Component ---
 export default function App() {
-  console.log("App component is rendering!");
   const [currentView, setCurrentView] = useState('dataInput');
   const [people, setPeople] = useState([]);
   const [organizations, setOrganizations] = useState([]);
